@@ -438,6 +438,8 @@ def _message_format(msg, image_info, device, partition_uuids):
     root_uuid = partition_uuids.get('root uuid')
     efi_system_partition_uuid = (
         partition_uuids.get('efi system partition uuid'))
+    LOG.debug("Partition_uuids efi_system_partition_uuid: %s", efi_system_partition_uuid)
+
     if (image_info.get('deploy_boot_mode') == 'uefi'
             and efi_system_partition_uuid):
         result_msg = msg + 'root_uuid={} efi_system_partition_uuid={}'

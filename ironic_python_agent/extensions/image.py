@@ -305,15 +305,6 @@ def _install_grub2(device, root_uuid, efi_system_part_uuid=None,
                           efi_partition_mount_point)
             efi_mounted = True
         else:
-            #NOTE: add mount efi_partition by zhujiawen
-            utils.execute('umount', efi_partition_mount_point, attempts=3,
-                          delay_on_retry=True)
-            efi_mounted = False
-            # NOTE: probably never needed for grub-mkconfig, does not hurt in
-            # case of doubt, cleaned in the finally clause anyway
-            utils.execute('mount', efi_partition,
-                          efi_partition_mount_point)
-            efi_mounted = True
             # FIXME(rg): does not work if ramdisk boot mode is not the same
             # as the target (--target=i386-pc, arch dependent).
             # See previous FIXME

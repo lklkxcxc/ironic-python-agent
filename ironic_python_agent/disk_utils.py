@@ -296,7 +296,7 @@ def make_partitions(dev, root_mb, swap_mb, ephemeral_mb,
                                     boot_flag='boot')
         part_dict['efi system partition'] = partition_index_to_path(
             dev, part_num)
-
+        LOG.debug("EFI System partition device: %s ", part_dict['efi system partition'])
     if (boot_mode == "bios" and boot_option == "local" and disk_label == "gpt"
         and not cpu_arch.startswith('ppc64')):
         part_num = dp.add_partition(CONF.disk_utils.bios_boot_partition_size,
