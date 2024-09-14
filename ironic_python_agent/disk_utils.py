@@ -491,7 +491,7 @@ def block_uuid(dev):
     Try to fetch the UUID, if that fails, try to fetch the PARTUUID.
     """
     #NOTE: This is needed to work around bug, wait 30 seconds for the
-    sleep(30)
+    time.sleep(30)
     ipa_utils.rescan_device(dev)
     info = get_device_information(dev, fields=['UUID', 'PARTUUID'])
     if info.get('UUID'):
