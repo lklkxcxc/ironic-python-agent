@@ -38,6 +38,7 @@ from ironic_python_agent import disk_partitioner
 from ironic_python_agent import errors
 from ironic_python_agent import format_inspector
 from ironic_python_agent import qemu_img
+from ironic_python_agent import utils as ipa_utils
 
 CONF = cfg.CONF
 
@@ -489,6 +490,7 @@ def block_uuid(dev):
 
     Try to fetch the UUID, if that fails, try to fetch the PARTUUID.
     """
+    ipa_utils.rescan_device(dev)
     info = get_device_information(dev, fields=['UUID', 'PARTUUID'])
     if info.get('UUID'):
         return info['UUID']

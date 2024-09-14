@@ -187,6 +187,7 @@ def _install_grub2(device, root_uuid, efi_system_part_uuid=None,
 
     try:
         # Mount the partition and binds
+        LOG.debug("Varible efi_system_part_uuid is : %s", efi_system_part_uuid)
         path = tempfile.mkdtemp()
         if efi_system_part_uuid:
             efi_part = partition_utils.get_partition(

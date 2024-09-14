@@ -334,15 +334,15 @@ def work_on_disk(dev, root_mb, swap_mb, ephemeral_mb, ephemeral_format,
         ] = part_dict.get('PReP Boot partition')
 
     try:
-        #NOTE: Rescan device to get current status (e.g. reflect modification of mkfs)
-        disk_utils.trigger_device_rescan(dev)
         for part, part_dev in uuids_to_return.items():
             if part_dev:
                 uuids_to_return[part] = disk_utils.block_uuid(part_dev)
-
     except processutils.ProcessExecutionError:
         with excutils.save_and_reraise_exception():
             LOG.error("Failed to detect %s", part)
+    LOG.debug(
+        "Detected efi system partition UUIDs for partitions: %s", uuids_to_return.get('efi system partition uuid')
+    )
 
     return dict(partitions=part_dict, **uuids_to_return)
 
