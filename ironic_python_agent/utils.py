@@ -921,8 +921,6 @@ def rescan_device(device):
     except processutils.ProcessExecutionError:
         LOG.warning("Couldn't re-read the partition table "
                     "on device %s", device)
-        # NOTE: This is a workaround for a kernel bug where the partition
-        execute('partx', '-av', device, attempts=3, delay_on_retry=True)
     try:
         execute('udevadm', 'settle')
     except processutils.ProcessExecutionError as e:
