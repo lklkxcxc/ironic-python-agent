@@ -25,6 +25,7 @@ import os
 import shutil
 import stat
 import tempfile
+import time
 
 from ironic_lib import exception
 from ironic_lib import utils
@@ -334,6 +335,8 @@ def work_on_disk(dev, root_mb, swap_mb, ephemeral_mb, ephemeral_format,
         ] = part_dict.get('PReP Boot partition')
 
     try:
+        #NOTE: This is needed to work around bug, wait 30 seconds for the
+        time.sleep(30)
         for part, part_dev in uuids_to_return.items():
             if part_dev:
                 uuids_to_return[part] = disk_utils.block_uuid(part_dev)
